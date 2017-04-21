@@ -21,6 +21,7 @@ install:
   - composer self-update -q
   - if [ "$deps" = "standard" ]; then composer --ignore-platform-reqs --prefer-stable --prefer-dist -n update; fi;
   - if [ "$deps" = "low" ]; then composer --ignore-platform-reqs --prefer-lowest -n --prefer-stable --prefer-dist update; fi;
+  - composer require --dev satooshi/php-coveralls
 
 script:
   - vendor/bin/phpmd src/ text codesize, controversial, design, naming, unusedcode
@@ -28,5 +29,5 @@ script:
   - vendor/bin/phpcs src --standard=psr2
   - vendor/bin/phpunit
 
-#after_script:
-#  - vendor/bin/coveralls
+after_script:
+  - vendor/bin/coveralls
