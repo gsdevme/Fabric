@@ -1,5 +1,8 @@
 # Fabric (WIP)
 
+[![Build Status](https://travis-ci.org/gsdevme/Fabric.svg?branch=master)](https://travis-ci.org/gsdevme/Fabric)
+[![Coverage Status](https://coveralls.io/repos/github/gsdevme/Fabric/badge.svg?branch=master)](https://coveralls.io/github/gsdevme/Fabric?branch=master)
+
 Fabric is a set of interfaces, traits and simple classes to help structure libraries and code that interact with APIs.
 
 ## Concept / Api
