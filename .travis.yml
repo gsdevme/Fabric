@@ -1,0 +1,32 @@
+language: php
+
+matrix:
+  include:
+    - php: 7.1
+      env: deps=low
+    - php: 7.1
+    - php: nightly
+
+sudo: false
+
+env:
+  global:
+    - deps=standard
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+install:
+  - composer self-update -q
+  - if [ "$deps" = "standard" ]; then composer --ignore-platform-reqs --prefer-stable --prefer-dist -n update; fi;
+  - if [ "$deps" = "low" ]; then composer --ignore-platform-reqs --prefer-lowest -n --prefer-stable --prefer-dist update; fi;
+
+script:
+  - vendor/bin/phpmd src/ text codesize, controversial, design, naming, unusedcode
+  - vendor/bin/phpstan analyse src --level 5
+  - vendor/bin/phpcs src --standard=psr2
+  - vendor/bin/phpunit
+
+#after_script:
+#  - vendor/bin/coveralls
