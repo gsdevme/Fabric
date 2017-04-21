@@ -22,6 +22,7 @@ install:
   - if [ "$deps" = "standard" ]; then composer --ignore-platform-reqs --prefer-stable --prefer-dist -n update; fi;
   - if [ "$deps" = "low" ]; then composer --ignore-platform-reqs --prefer-lowest -n --prefer-stable --prefer-dist update; fi;
   - composer require --dev --ignore-platform-reqs satooshi/php-coveralls
+  - composer require --dev --ignore-platform-reqs nikic/php-parser "^3.0"
 
 script:
   - vendor/bin/phpmd src/ text codesize, controversial, design, naming, unusedcode
