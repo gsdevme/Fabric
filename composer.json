@@ -1,18 +1,19 @@
 {
   "name": "gsdev/fabric",
   "description": "Fabric is a set of interfaces, traits and simple classes to help structure libraries and code that interact with APIs.",
+  "license": "MIT",
   "autoload": {
     "psr-4": {
       "Gsdev\\Fabric\\": [
         "src/Fabric"
       ]
-    },
-    "autoload-dev": {
-      "psr-4": {
-        "Gsdev\\Fabric\\Test\\": [
-          "tests/"
-        ]
-      }
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Gsdev\\Fabric\\Test\\": [
+        "tests/"
+      ]
     }
   },
   "require": {

@@ -4,10 +4,10 @@ namespace Gsdev\Fabric\Bridge\Guzzle;
 
 use Gsdev\Fabric\Bridge\Guzzle\Adapter\RequestToPsrAdapter;
 use Gsdev\Fabric\Model\ClientInterface;
-use Gsdev\Fabric\Model\Exception\ClientException;
+/*use Gsdev\Fabric\Model\Exception\ClientException;
 use Gsdev\Fabric\Model\Exception\FabricException;
 use Gsdev\Fabric\Model\Exception\InvalidResponseDataException;
-use Gsdev\Fabric\Model\Exception\UnauthorizedException;
+use Gsdev\Fabric\Model\Exception\UnauthorizedException;*/   
 use Gsdev\Fabric\Model\Request\RequestInterface;
 use Gsdev\Fabric\Model\Request\RequestOptionsInterface;
 use Gsdev\Fabric\Model\Response\ResponseInterface;
