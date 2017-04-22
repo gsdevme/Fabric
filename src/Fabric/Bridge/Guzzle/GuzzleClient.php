@@ -3,6 +3,7 @@
 namespace Gsdev\Fabric\Bridge\Guzzle;
 
 use Gsdev\Fabric\Model\Request\ValidateResponseDataRequestInterface;
+use Gsdev\Fabric\Model\Response\ExpectedResponseContentTypeInterface;
 use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use Gsdev\Fabric\Bridge\Guzzle\Adapter\RequestToPsrAdapter;
 use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapter;

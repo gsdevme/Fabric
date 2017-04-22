@@ -4,7 +4,7 @@ namespace Gsdev\Fabric\Model\Request;
 
 use Gsdev\Fabric\Model\Validator\ValidatorInterface;
 
-interface ValidateResponseDataRequestInterface
+interface ValidateResponseDataRequestInterface extends RequestInterface
 {
     public function getValidator(): ValidatorInterface;
 }
