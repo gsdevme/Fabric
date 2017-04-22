@@ -6,6 +6,12 @@ class JsonResponseToDataAdapter
 {
     public function adapt(string $json): ?array
     {
-        return @json_decode($json, true);
+        $data = json_decode($json, true);
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new \InvalidArgumentException('Adapter cannot decode string, invalid json?');
+        }
+
+        return $data;
     }
 }

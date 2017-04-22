@@ -2,6 +2,7 @@
 
 namespace Gsdev\Fabric\Bridge\Guzzle;
 
+use Gsdev\Fabric\Model\Request\ValidateResponseDataRequestInterface;
 use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use Gsdev\Fabric\Bridge\Guzzle\Adapter\RequestToPsrAdapter;
 use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapter;
@@ -52,12 +53,35 @@ class GuzzleClient implements ClientInterface
         }
 
         $psrResponse = $this->doRequest($psrRequest, $options);
+
+        if ($request instanceof ValidateResponseDataRequestInterface) {
+            $validator = $request->getValidator();
+
+            if (!$validator->isValidResponseData($request, $psrResponse)) {
+                return null;
+            }
+        }
+
         $responseData = $this->responseAdapter->adapt($psrResponse);
 
+        return $this->doResponse($request, $responseData);
+    }
+
+    private function doRequest(PsrRequestInterface $request, array $options): PsrResponseInterface
+    {
+        try {
+            return $this->guzzle->send($request, $options);
+        } catch (GuzzleException $e) {
+            $this->handleException($e);
+        }
+    }
+
+    private function doResponse(RequestInterface $request, array $responseData): ?ResponseInterface
+    {
         if ($request instanceof RequestResponseInterface) {
             $responseResource = $request->getResponseResource();
 
-            if (in_array(ResponseResourceInterface::class, class_implements($responseResource))) {
+            if ($this->isResponseResource($responseResource)) {
                 /** @var ResponseResourceInterface $responseResource */
                 return $responseResource::createFromResponseData($responseData);
             }
@@ -68,12 +92,8 @@ class GuzzleClient implements ClientInterface
         throw new \Exception('todo');
     }
 
-    private function doRequest(PsrRequestInterface $request, array $options): PsrResponseInterface
+    private function isResponseResource(string $responseResource): bool
     {
-        try {
-            return $this->guzzle->send($request, $options);
-        } catch (GuzzleException $e) {
-            $this->handleException($e);
-        }
+        return in_array(ResponseResourceInterface::class, class_implements($responseResource));
     }
 }
