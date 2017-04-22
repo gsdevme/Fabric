@@ -3,7 +3,6 @@
 namespace Gsdev\Fabric\Component\Response\Adapter;
 
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Component\VarDumper\VarDumper;
 
 class PsrResponseToDataAdapter
 {
