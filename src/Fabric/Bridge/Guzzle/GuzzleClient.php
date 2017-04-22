@@ -2,6 +2,7 @@
 
 namespace Gsdev\Fabric\Bridge\Guzzle;
 
+use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use Gsdev\Fabric\Bridge\Guzzle\Adapter\RequestToPsrAdapter;
 use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapter;
 use Gsdev\Fabric\Model\ClientInterface;
@@ -34,12 +35,11 @@ class GuzzleClient implements ClientInterface
      */
     private $guzzle;
 
-
-    public function __construct()
+    public function __construct(GuzzleClientInterface $client = null)
     {
         $this->requestAdapter = new RequestToPsrAdapter();
         $this->responseAdapter = new PsrResponseToDataAdapter();
-        $this->guzzle = new Client();
+        $this->guzzle = $client ?: new Client();
     }
 
     public function send(RequestInterface $request): ?ResponseInterface
