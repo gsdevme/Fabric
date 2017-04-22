@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php declare(strict_types = 1);
 
 namespace Gsdev\Fabric\Bridge\Guzzle;
 
@@ -36,6 +36,10 @@ trait GuzzleExceptionHandlerTrait
             throw new UnauthorizedException($reasonPhrase, 401, $e);
         }
 
-        throw new ClientException($e->getMessage(), 0, $e);
+        if ($e instanceof \RuntimeException) {
+            throw new ClientException($e->getMessage(), 0, $e);
+        }
+
+        throw new ClientException('Unknown Error', 0, $e);
     }
 }
