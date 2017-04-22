@@ -6,7 +6,6 @@ use Gsdev\Fabric\Bridge\Guzzle\GuzzleClient;
 use Gsdev\Fabric\Model\Request\RequestInterface;
 use Gsdev\Fabric\Model\Request\RequestResponseInterface;
 use Gsdev\Fabric\Test\Bridge\Guzzle\Fixtures\Stub\GetResponseResourceStub;
-use Gsdev\Fabric\Test\Bridge\Guzzle\Fixtures\Stub\GetResponseStub;
 use GuzzleHttp\ClientInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
@@ -45,7 +44,7 @@ class GuzzleClientTest extends MockeryTestCase
 
         $this->client->shouldReceive('send')->andReturn($response);
 
-        /** @var GetResponseStub $response */
+        /** @var GetResponseResourceStub $response */
         $response = $this->guzzle->send($request);
 
         $this->assertSame(['id' => 1], $response->getData());

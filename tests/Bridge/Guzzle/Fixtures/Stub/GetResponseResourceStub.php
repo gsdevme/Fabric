@@ -5,23 +5,22 @@ namespace Gsdev\Fabric\Test\Bridge\Guzzle\Fixtures\Stub;
 use Gsdev\Fabric\Model\Response\ResponseInterface;
 use Gsdev\Fabric\Model\Response\ResponseResourceInterface;
 
-class GetResponseResourceStub implements ResponseResourceInterface
+class GetResponseResourceStub implements ResponseInterface, ResponseResourceInterface
 {
+    private $data;
+
+    public function __construct($data)
+    {
+        $this->data = $data;
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
     public static function createFromResponseData($data): ?ResponseInterface
     {
-        return new class($data) implements ResponseInterface
-        {
-            private $data;
-
-            public function __construct($data)
-            {
-                $this->data = $data;
-            }
-
-            public function getData()
-            {
-                return $this->data;
-            }
-        };
+        return new self($data);
     }
 }
