@@ -4,5 +4,4 @@ namespace Gsdev\Fabric\Model\Response;
 
 interface ResponseInterface
 {
-
 }

@@ -4,5 +4,5 @@ namespace Gsdev\Fabric\Model\Response;
 
 interface ResponseFactoryInterface
 {
-    public function createFromResponseData($data): ResponseInterface;
+    public function createFromResponseData($data): ?ResponseInterface;
 }

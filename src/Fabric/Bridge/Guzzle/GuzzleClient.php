@@ -3,47 +3,67 @@
 namespace Gsdev\Fabric\Bridge\Guzzle;
 
 use Gsdev\Fabric\Bridge\Guzzle\Adapter\RequestToPsrAdapter;
+use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapter;
 use Gsdev\Fabric\Model\ClientInterface;
-use Gsdev\Fabric\Model\Exception\ClientException;
-use Gsdev\Fabric\Model\Exception\UnauthorizedException;
 use Gsdev\Fabric\Model\Request\RequestInterface;
 use Gsdev\Fabric\Model\Request\RequestOptionsInterface;
+use Gsdev\Fabric\Model\Request\RequestResponseInterface;
 use Gsdev\Fabric\Model\Response\ResponseInterface;
+use Gsdev\Fabric\Model\Response\ResponseResourceInterface;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Exception\ClientException as GuzzleClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\RequestInterface as PsrRequestInterface;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
 class GuzzleClient implements ClientInterface
 {
+    use GuzzleExceptionHandlerTrait;
+
     /**
      * @var RequestToPsrAdapter
      */
-    private $adapter;
+    private $requestAdapter;
+
+    /**
+     * @var PsrResponseToDataAdapter
+     */
+    private $responseAdapter;
 
     /**
      * @var Client
      */
     private $guzzle;
 
+
     public function __construct()
     {
-        $this->adapter = new RequestToPsrAdapter();
+        $this->requestAdapter = new RequestToPsrAdapter();
+        $this->responseAdapter = new PsrResponseToDataAdapter();
         $this->guzzle = new Client();
     }
 
     public function send(RequestInterface $request): ?ResponseInterface
     {
         $options = [];
-
-        $psrRequest = $this->adapter->adapt($request);
+        $psrRequest = $this->requestAdapter->adapt($request);
 
         if ($request instanceof RequestOptionsInterface) {
             $options = $request->getOptions();
         }
 
-        $response = $this->doRequest($psrRequest, $options);
+        $psrResponse = $this->doRequest($psrRequest, $options);
+        $responseData = $this->responseAdapter->adapt($psrResponse);
+
+        if ($request instanceof RequestResponseInterface) {
+            $responseResource = $request->getResponseResource();
+
+            if (in_array(ResponseResourceInterface::class, class_implements($responseResource))) {
+                /** @var ResponseResourceInterface $responseResource */
+                return $responseResource::createFromResponseData($responseData);
+            }
+
+            return null;
+        }
 
         throw new \Exception('todo');
     }
@@ -52,21 +72,8 @@ class GuzzleClient implements ClientInterface
     {
         try {
             return $this->guzzle->send($request, $options);
-        } catch (BadResponseException $e) {
-            $response = $e->getResponse();
-            $reasonPhrase = '';
-            $status = 0;
-
-            if ($response instanceof PsrResponseInterface) {
-                $status = $response->getStatusCode();
-                $reasonPhrase = $response->getReasonPhrase();
-            }
-
-            if ($e instanceof GuzzleClientException && $status === 401) {
-                throw new UnauthorizedException($reasonPhrase, 401, $e);
-            }
-
-            throw new ClientException($e->getMessage(), 0, $e);
+        } catch (GuzzleException $e) {
+            $this->handleException($e);
         }
     }
 }
