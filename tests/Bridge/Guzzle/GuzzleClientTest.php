@@ -56,7 +56,11 @@ class GuzzleClientTest extends MockeryTestCase
     public function testSimpleJsonSendWithOptions()
     {
         /** @var Mockery\MockInterface|RequestInterface $request */
-        $request = Mockery::mock(RequestInterface::class, RequestResponseInterface::class, RequestOptionsInterface::class);
+        $request = Mockery::mock(
+            RequestInterface::class,
+            RequestResponseInterface::class,
+            RequestOptionsInterface::class
+        );
         $request->shouldReceive('getUri')->andReturn('https://abc.com/123');
         $request->shouldReceive('getMethod')->andReturn('GET');
         $request->shouldReceive('getOptions')->andReturn(['timeout' => 69]);
@@ -81,7 +85,11 @@ class GuzzleClientTest extends MockeryTestCase
         $validator->shouldReceive('isValidResponseData')->andReturn(true);
 
         /** @var Mockery\MockInterface|RequestInterface $request */
-        $request = Mockery::mock(RequestInterface::class, RequestResponseInterface::class, ValidateResponseDataRequestInterface::class);
+        $request = Mockery::mock(
+            RequestInterface::class,
+            RequestResponseInterface::class,
+            ValidateResponseDataRequestInterface::class
+        );
         $request->shouldReceive('getUri')->andReturn('https://abc.com/123');
         $request->shouldReceive('getMethod')->andReturn('GET');
         $request->shouldReceive('getResponseResource')->andReturn(GetResponseResourceStub::class);
@@ -106,7 +114,11 @@ class GuzzleClientTest extends MockeryTestCase
         $validator->shouldReceive('isValidResponseData')->andReturn(false);
 
         /** @var Mockery\MockInterface|RequestInterface $request */
-        $request = Mockery::mock(RequestInterface::class, RequestResponseInterface::class, ValidateResponseDataRequestInterface::class);
+        $request = Mockery::mock(
+            RequestInterface::class,
+            RequestResponseInterface::class,
+            ValidateResponseDataRequestInterface::class
+        );
         $request->shouldReceive('getUri')->andReturn('https://abc.com/123');
         $request->shouldReceive('getMethod')->andReturn('GET');
         $request->shouldReceive('getResponseResource')->andReturn(GetResponseResourceStub::class);
