@@ -2,8 +2,7 @@
 
 namespace Gsdev\Fabric\Component\Response\Adapter;
 
-use Gsdev\Fabric\Model\Exception\FabricException;
-use Gsdev\Fabric\Model\Exception\MissingContentTypeForResponseData;
+use Gsdev\Fabric\Model\Exception\MissingContentTypeForResponseDataException;
 use Psr\Http\Message\ResponseInterface;
 
 class PsrResponseToDataAdapter
@@ -11,7 +10,7 @@ class PsrResponseToDataAdapter
     public function adapt(ResponseInterface $response): ?array
     {
         if (!$response->hasHeader('Content-Type')) {
-            throw new MissingContentTypeForResponseData();
+            throw new MissingContentTypeForResponseDataException();
         }
 
         $contentType = $response->getHeader('Content-Type');

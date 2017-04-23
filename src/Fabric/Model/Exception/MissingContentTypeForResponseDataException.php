@@ -2,7 +2,7 @@
 
 namespace Gsdev\Fabric\Model\Exception;
 
-class MissingContentTypeForResponseData extends FabricException
+class MissingContentTypeForResponseDataException extends FabricException
 {
     const MESSAGE = <<<STRING
 The content type for the response could not be determined.
