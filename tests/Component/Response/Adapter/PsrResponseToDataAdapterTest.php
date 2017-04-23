@@ -1,7 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Gsdev\Fabric\Component\Response\Adapter;
+namespace Gsdev\Fabric\Test\Component\Response\Adapter;
 
+use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapter;
 use Gsdev\Fabric\Model\Exception\MissingContentTypeForResponseDataException;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Psr\Http\Message\ResponseInterface;
