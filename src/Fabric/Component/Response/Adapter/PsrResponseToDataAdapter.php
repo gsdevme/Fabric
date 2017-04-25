@@ -16,9 +16,15 @@ class PsrResponseToDataAdapter
         $contentType = $response->getHeader('Content-Type');
         $contentType = array_pop($contentType);
 
+        if (strpos($contentType, ';') !== false) {
+            $contentType = strstr($contentType, ';', true);
+        }
+
         switch ($contentType) {
             case 'application/json':
                 return (new JsonResponseToDataAdapter())->adapt((string)$response->getBody());
+            case 'text/plain':
+                return ['data' => (string)$response->getBody()];
             default:
                 throw new \RuntimeException('todo');
         }
