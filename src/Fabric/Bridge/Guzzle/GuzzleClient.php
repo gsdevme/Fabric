@@ -2,6 +2,7 @@
 
 namespace Gsdev\Fabric\Bridge\Guzzle;
 
+use Gsdev\Fabric\Model\Request\RequestResponseFactoryInterface;
 use Gsdev\Fabric\Model\Request\ValidateResponseDataRequestInterface;
 use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use Gsdev\Fabric\Bridge\Guzzle\Adapter\RequestToPsrAdapter;
@@ -87,6 +88,10 @@ class GuzzleClient implements ClientInterface
             }
 
             return null;
+        }
+
+        if ($request instanceof RequestResponseFactoryInterface) {
+            return $request->getResponseFactory()->createFromResponseData($responseData);
         }
 
         throw new \Exception('todo');
