@@ -30,4 +30,43 @@ class PsrResponseToDataAdapterTest extends MockeryTestCase
 
         $this->adapter->adapt($response);
     }
+
+    public function testAdaptWithPlainText()
+    {
+        /** @var Mockery\MockInterface|ResponseInterface $response */
+        $response = Mockery::mock(ResponseInterface::class);
+        $response->shouldReceive('hasHeader')->andReturn(true);
+        $response->shouldReceive('getHeader')->andReturn(['text/plain']);
+        $response->shouldReceive('getBody')->andReturn('123');
+
+        $return = $this->adapter->adapt($response);
+
+        $this->assertEquals(['data' => 123], $return);
+    }
+
+    public function testAdaptWithJson()
+    {
+        /** @var Mockery\MockInterface|ResponseInterface $response */
+        $response = Mockery::mock(ResponseInterface::class);
+        $response->shouldReceive('hasHeader')->andReturn(true);
+        $response->shouldReceive('getHeader')->andReturn(['application/json']);
+        $response->shouldReceive('getBody')->andReturn(json_encode(['test' => 1337]));
+
+        $return = $this->adapter->adapt($response);
+
+        $this->assertEquals(['test' => 1337], $return);
+    }
+
+    public function testAdaptWithJsonEncoding()
+    {
+        /** @var Mockery\MockInterface|ResponseInterface $response */
+        $response = Mockery::mock(ResponseInterface::class);
+        $response->shouldReceive('hasHeader')->andReturn(true);
+        $response->shouldReceive('getHeader')->andReturn(['application/json; encoding=utf8']);
+        $response->shouldReceive('getBody')->andReturn(json_encode(['test' => 1337]));
+
+        $return = $this->adapter->adapt($response);
+
+        $this->assertEquals(['test' => 1337], $return);
+    }
 }

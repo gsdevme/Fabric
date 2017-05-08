@@ -5,6 +5,9 @@ default: all;
 composer:
 	composer install --no-scripts --prefer-stable
 
+fix-standards:
+	vendor/bin/phpcbf src --standard=psr2
+
 standards:
 	vendor/bin/phpcs src --standard=psr2
 	vendor/bin/phpcs tests --standard=psr2
@@ -18,5 +21,8 @@ static-analysis:
 
 tests:
 	vendor/bin/phpunit
+
+code-coverage:
+	vendor/bin/phpunit --coverage-html=coverage
 
 all: standards mess static-analysis tests
