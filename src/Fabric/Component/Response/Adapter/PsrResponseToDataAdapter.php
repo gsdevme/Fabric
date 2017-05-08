@@ -26,7 +26,7 @@ class PsrResponseToDataAdapter
             case 'text/plain':
                 return ['data' => (string)$response->getBody()];
             default:
-                throw new \RuntimeException('todo');
+                throw new \RuntimeException('Unsupported return type');
         }
     }
 }

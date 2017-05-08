@@ -69,4 +69,17 @@ class PsrResponseToDataAdapterTest extends MockeryTestCase
 
         $this->assertEquals(['test' => 1337], $return);
     }
+
+    public function testAdaptWithUnsupportedType()
+    {
+        $this->expectException(\RuntimeException::class);
+
+        /** @var Mockery\MockInterface|ResponseInterface $response */
+        $response = Mockery::mock(ResponseInterface::class);
+        $response->shouldReceive('hasHeader')->andReturn(true);
+        $response->shouldReceive('getHeader')->andReturn(['application/xml; encoding=utf8']);
+        $response->shouldReceive('getBody')->andReturn('<xml></xml>');
+
+        $this->adapter->adapt($response);
+    }
 }
