@@ -5,7 +5,7 @@ namespace Gsdev\Fabric\Component\Response\Adapter;
 use Gsdev\Fabric\Model\Exception\MissingContentTypeForResponseDataException;
 use Psr\Http\Message\ResponseInterface;
 
-class PsrResponseToDataAdapter
+class PsrResponseToDataAdapter implements PsrResponseToDataAdapterInterface
 {
     public function adapt(ResponseInterface $response): ?array
     {

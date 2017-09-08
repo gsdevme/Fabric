@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
 trait GuzzleExceptionHandlerTrait
 {
-    public function handleException(GuzzleException $e): void
+    private function handleException(GuzzleException $e): void
     {
         $response = null;
         $reasonPhrase = '';
