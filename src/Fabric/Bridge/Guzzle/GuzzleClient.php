@@ -1,21 +1,20 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Gsdev\Fabric\Bridge\Guzzle;
 
-use Gsdev\Fabric\Bridge\Guzzle\Handler\PsrResponseHandler;
-use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapterInterface;
-use Gsdev\Fabric\Model\Request\RequestResponseFactoryInterface;
-use Gsdev\Fabric\Model\Request\ValidateResponseDataRequestInterface;
-use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use Gsdev\Fabric\Bridge\Guzzle\Adapter\RequestToPsrAdapter;
 use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapter;
+use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapterInterface;
 use Gsdev\Fabric\Model\ClientInterface;
 use Gsdev\Fabric\Model\Request\RequestInterface;
 use Gsdev\Fabric\Model\Request\RequestOptionsInterface;
+use Gsdev\Fabric\Model\Request\RequestResponseFactoryInterface;
 use Gsdev\Fabric\Model\Request\RequestResponseInterface;
+use Gsdev\Fabric\Model\Request\ValidateResponseDataRequestInterface;
 use Gsdev\Fabric\Model\Response\ResponseInterface;
 use Gsdev\Fabric\Model\Response\ResponseResourceInterface;
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\RequestInterface as PsrRequestInterface;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
@@ -39,11 +38,12 @@ class GuzzleClient implements ClientInterface
      */
     private $guzzle;
 
-    public function __construct(GuzzleClientInterface $client = null, ?PsrResponseToDataAdapterInterface $responseAdapter = null)
-    {
+    public function __construct(
+        GuzzleClientInterface $client = null,
+        ?PsrResponseToDataAdapterInterface $responseAdapter = null
+    ) {
         $this->requestAdapter = new RequestToPsrAdapter();
         $this->responseAdapter = $responseAdapter ?: new PsrResponseToDataAdapter();
-
         $this->guzzle = $client ?: new Client();
     }
 
