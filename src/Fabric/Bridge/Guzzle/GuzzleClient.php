@@ -80,7 +80,7 @@ class GuzzleClient implements ClientInterface
         }
     }
 
-    private function doResponse(RequestInterface $request, array $responseData): ?ResponseInterface
+    private function doResponse(RequestInterface $request, $responseData): ?ResponseInterface
     {
         if ($request instanceof RequestResponseInterface) {
             $responseResource = $request->getResponseResource();
