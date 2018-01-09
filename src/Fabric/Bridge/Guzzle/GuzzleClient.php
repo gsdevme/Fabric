@@ -29,12 +29,12 @@ class GuzzleClient implements ClientInterface
     private $requestAdapter;
 
     /**
-     * @var PsrResponseToDataAdapter
+     * @var PsrResponseToDataAdapterInterface
      */
     private $responseAdapter;
 
     /**
-     * @var Client
+     * @var GuzzleClientInterface
      */
     private $guzzle;
 

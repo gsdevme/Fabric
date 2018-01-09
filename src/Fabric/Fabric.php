@@ -21,7 +21,7 @@ class Fabric implements ClientInterface
     private $client;
 
     /**
-     * @var null|LoggerInterface
+     * @var LoggerInterface
      */
     private $logger;
 
