@@ -13,8 +13,8 @@ standards:
 	vendor/bin/phpcs tests --standard=psr2
 
 static-analysis:
-	vendor/bin/phpstan analyse src --level 7
-	vendor/bin/phpstan analyse -l 4 tests/
+	vendor/bin/phpstan.phar analyse -l 7 src
+	vendor/bin/phpstan.phar analyse -l 4 tests
 
 tests:
 	vendor/bin/phpunit
