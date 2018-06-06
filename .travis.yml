@@ -14,10 +14,6 @@ env:
   global:
     - deps=standard
 
-cache:
-  directories:
-    - $HOME/.composer/cache
-
 install:
   - composer self-update -q
   - if [ "$deps" = "standard" ]; then composer --ignore-platform-reqs --prefer-stable --prefer-dist -n update; fi;
