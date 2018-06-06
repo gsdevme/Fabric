@@ -35,7 +35,7 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/usemarkup/markup-coding-standard"
+      "url": "https://github.com/usemarkup/markup-coding-standard.git"
     }
   ]
 }
