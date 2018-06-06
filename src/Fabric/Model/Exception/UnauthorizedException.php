@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace Gsdev\Fabric\Model\Exception;
 
-class UnauthorizedException extends FabricException
+class UnauthorizedException extends \RuntimeException implements FabricExceptionInterface
 {
 }

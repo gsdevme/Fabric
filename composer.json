@@ -28,9 +28,14 @@
     "guzzlehttp/psr7": "^1.0",
     "phpunit/phpunit": "^6.0",
     "guzzlehttp/guzzle": "^6.0",
-    "phpstan/phpstan-shim": "@stable",
-    "squizlabs/php_codesniffer": "^3.0",
+    "markup/coding-standard": "dev-master",
     "mockery/mockery": "^1.0",
-    "symfony/var-dumper": "^3.2"
-  }
+    "symfony/var-dumper": "^3.4|^4.0"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/usemarkup/markup-coding-standard"
+    }
+  ]
 }

@@ -2,7 +2,7 @@
 
 namespace Gsdev\Fabric\Test\Exception;
 
-use Gsdev\Fabric\Model\Exception\FabricException;
+use Gsdev\Fabric\Model\Exception\FabricExceptionInterface;
 use Gsdev\Fabric\Model\Exception\MissingContentTypeForResponseDataException;
 use PHPUnit\Framework\TestCase;
 
@@ -12,6 +12,6 @@ class MissingContentTypeForResponseDataExceptionTest extends TestCase
     {
         $exception = new MissingContentTypeForResponseDataException();
 
-        $this->assertInstanceOf(FabricException::class, $exception);
+        $this->assertInstanceOf(FabricExceptionInterface::class, $exception);
     }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<ruleset name="next">
+    <description>Next Coding Standard</description>
+
+    <arg name="tab-width" value="4"/>
+    <arg name="encoding" value="utf-8"/>
+
+    <rule ref="vendor/markup/coding-standard/Markup/ruleset.xml"/>
+
+    <!--Enforce strict_types-->
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/TypeHints/DeclareStrictTypesSniff.php">
+        <properties>
+            <property name="newlinesCountBetweenOpenTagAndDeclare" value="1"/>
+            <property name="spacesCountAroundEqualsSign" value="0"/>
+        </properties>
+    </rule>
+
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Classes/UnusedPrivateElementsSniff.php"/>
+
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/LanguageConstructWithParenthesesSniff.php"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/NewWithParenthesesSniff.php"/>
+
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/ControlStructures/DisallowYodaComparisonSniff.php"/>
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/AlphabeticallySortedUsesSniff.php"/>
+
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/Sniffs/Namespaces/UseDoesNotStartWithBackslashSniff.php"/>
+
+    <exclude-pattern>src/*/Tests/*</exclude-pattern>
+    <exclude-pattern>src/*/Test/*</exclude-pattern>
+</ruleset>

@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace Gsdev\Fabric\Model\Exception;
 
-class ClientException extends FabricException
+class ClientException extends \RuntimeException implements FabricExceptionInterface
 {
 }

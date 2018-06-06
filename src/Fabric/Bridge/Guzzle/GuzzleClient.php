@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace Gsdev\Fabric\Bridge\Guzzle;
 
@@ -6,6 +7,7 @@ use Gsdev\Fabric\Bridge\Guzzle\Adapter\RequestToPsrAdapter;
 use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapter;
 use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapterInterface;
 use Gsdev\Fabric\Model\ClientInterface;
+use Gsdev\Fabric\Model\Exception\UnknownClientException;
 use Gsdev\Fabric\Model\Request\RequestInterface;
 use Gsdev\Fabric\Model\Request\RequestOptionsInterface;
 use Gsdev\Fabric\Model\Request\RequestResponseFactoryInterface;
@@ -18,6 +20,8 @@ use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\RequestInterface as PsrRequestInterface;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 
 class GuzzleClient implements ClientInterface
 {
@@ -37,14 +41,20 @@ class GuzzleClient implements ClientInterface
      * @var GuzzleClientInterface
      */
     private $guzzle;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
     public function __construct(
         GuzzleClientInterface $client = null,
-        ?PsrResponseToDataAdapterInterface $responseAdapter = null
+        ?PsrResponseToDataAdapterInterface $responseAdapter = null,
+        LoggerInterface $logger = null
     ) {
         $this->requestAdapter = new RequestToPsrAdapter();
         $this->responseAdapter = $responseAdapter ?: new PsrResponseToDataAdapter();
         $this->guzzle = $client ?: new Client();
+        $this->logger = $logger ?: new NullLogger();
     }
 
     public function send(RequestInterface $request): ?ResponseInterface
@@ -77,6 +87,18 @@ class GuzzleClient implements ClientInterface
             return $this->guzzle->send($request, $options);
         } catch (GuzzleException $e) {
             $this->handleException($e);
+        } catch (\Throwable $t) {
+            $this->logger->error(
+                'Exception threw unexpected exception',
+                [
+                    'message' => $t->getMessage(),
+                    'line' => $t->getLine(),
+                    'file' => $t->getFile(),
+                    'trace' => $t->getTraceAsString(),
+                ]
+            );
+
+            throw new UnknownClientException($t->getMessage(), $t->getCode(), $t);
         }
     }
 
@@ -86,8 +108,11 @@ class GuzzleClient implements ClientInterface
             $responseResource = $request->getResponseResource();
 
             if ($this->isResponseResource($responseResource)) {
-                /** @var ResponseResourceInterface $responseResource */
-                return $responseResource::createFromResponseData($responseData);
+                /** @var ResponseResourceInterface $responseResourceClass */
+                $responseResourceClass = $responseResource;
+                $response = $responseResourceClass::createFromResponseData($responseData);
+
+                return $response;
             }
 
             return null;
@@ -97,7 +122,9 @@ class GuzzleClient implements ClientInterface
             return $request->getResponseFactory()->createFromResponseData($responseData);
         }
 
-        throw new \Exception('todo');
+        // @todo error here
+
+        return null;
     }
 
     private function isResponseResource(string $responseResource): bool

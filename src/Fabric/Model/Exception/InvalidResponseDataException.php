@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Gsdev\Fabric\Model\Exception;
 
 use Gsdev\Fabric\Model\Request\RequestInterface;
 
-class InvalidResponseDataException extends FabricException
+class InvalidResponseDataException extends \RuntimeException implements FabricExceptionInterface
 {
     /**
      * @var RequestInterface

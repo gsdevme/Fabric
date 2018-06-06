@@ -1,7 +1,8 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace Gsdev\Fabric\Model\Exception;
 
-class TimeoutException extends FabricException
+class TimeoutException extends \RuntimeException implements FabricExceptionInterface
 {
 }

@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace Gsdev\Fabric\Component\Response\Adapter;
 
@@ -8,7 +9,7 @@ class JsonResponseToDataAdapter
     {
         $data = json_decode($json, true);
 
-        if (JSON_ERROR_NONE !== json_last_error()) {
+        if (json_last_error() !== JSON_ERROR_NONE) {
             throw new \InvalidArgumentException('Adapter cannot decode string, invalid json?');
         }
 

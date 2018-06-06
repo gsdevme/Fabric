@@ -2,9 +2,14 @@
 
 require_once __DIR__.'/../../vendor/autoload.php';
 
-use Gsdev\Fabric;
+use Gsdev\Fabric\Model\Response\ResponseInterface;
+use Gsdev\Fabric\Model\Response\ResponseResourceInterface;
+use Gsdev\Fabric\Component\Request\GetRequestTrait;
+use Gsdev\Fabric\Model\Request\RequestInterface;
+use Gsdev\Fabric\Model\Request\RequestResponseInterface;
+use Gsdev\Fabric\Bridge\Guzzle\GuzzleClient;
 
-class PublicIpAddressResponse implements Fabric\Model\Response\ResponseInterface, Fabric\Model\Response\ResponseResourceInterface
+class PublicIpAddressResponse implements ResponseInterface, ResponseResourceInterface
 {
     private $ip;
 
@@ -18,7 +23,7 @@ class PublicIpAddressResponse implements Fabric\Model\Response\ResponseInterface
         return $this->ip;
     }
 
-    public static function createFromResponseData($data): ?Fabric\Model\Response\ResponseInterface
+    public static function createFromResponseData($data): ?ResponseInterface
     {
         if (!isset($data['ip'])) {
             return null;
@@ -29,9 +34,9 @@ class PublicIpAddressResponse implements Fabric\Model\Response\ResponseInterface
 
 }
 
-class GetPublicIpAddressRequest implements Fabric\Model\Request\RequestInterface, Fabric\Model\Request\RequestResponseInterface
+class GetPublicIpAddressRequest implements RequestInterface, RequestResponseInterface
 {
-    use Fabric\Component\Request\GetRequestTrait;
+    use GetRequestTrait;
 
     public function getUri(): string
     {
@@ -44,7 +49,7 @@ class GetPublicIpAddressRequest implements Fabric\Model\Request\RequestInterface
     }
 }
 
-$client = new Fabric\Bridge\Guzzle\GuzzleClient();
+$client = new GuzzleClient();
 /** @var PublicIpAddressResponse $response */
 $response = $client->send(new GetPublicIpAddressRequest());
 

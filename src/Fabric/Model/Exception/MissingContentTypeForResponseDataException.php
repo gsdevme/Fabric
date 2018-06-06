@@ -1,8 +1,9 @@
-<?php declare(strict_types = 1);
+<?php
+declare(strict_types=1);
 
 namespace Gsdev\Fabric\Model\Exception;
 
-class MissingContentTypeForResponseDataException extends FabricException
+class MissingContentTypeForResponseDataException extends \RuntimeException implements FabricExceptionInterface
 {
     const MESSAGE = <<<STRING
 The content type for the response could not be determined.

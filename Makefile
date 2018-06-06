@@ -6,10 +6,10 @@ composer:
 	composer install --no-scripts --prefer-stable
 
 fix-standards:
-	vendor/bin/phpcbf src --standard=psr2
+	vendor/bin/phpcbf src  --standard=ruleset.xml -p --colors
 
 standards:
-	vendor/bin/phpcs src --standard=psr2
+	vendor/bin/phpcs src  --standard=ruleset.xml -p --colors
 	vendor/bin/phpcs tests --standard=psr2
 
 static-analysis:
@@ -22,4 +22,7 @@ tests:
 code-coverage:
 	vendor/bin/phpunit --coverage-html=coverage
 
-all: standards static-analysis tests
+mess:
+	vendor/bin/phpmd src/ text vendor/markup/coding-standard/phpmd.xml
+
+all: standards static-analysis mess tests
