@@ -26,16 +26,13 @@
   },
   "require-dev": {
     "guzzlehttp/psr7": "^1.0",
-    "phpunit/phpunit": "^6.0",
+    "phpunit/phpunit": "^7.0",
     "guzzlehttp/guzzle": "^6.0",
-    "markup/coding-standard": "dev-master",
+    "phpstan/phpstan-shim": "@stable",
+    "phpmd/phpmd": "@stable",
+    "squizlabs/php_codesniffer": "@stable",
+    "slevomat/coding-standard": "@stable",
     "mockery/mockery": "^1.0",
     "symfony/var-dumper": "^3.4|^4.0"
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/usemarkup/markup-coding-standard.git"
-    }
-  ]
+  }
 }

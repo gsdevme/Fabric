@@ -23,6 +23,6 @@ code-coverage:
 	vendor/bin/phpunit --coverage-html=coverage
 
 mess:
-	vendor/bin/phpmd src/ text vendor/markup/coding-standard/phpmd.xml
+	vendor/bin/phpmd src/ text phpmd.xml
 
 all: standards static-analysis mess tests
