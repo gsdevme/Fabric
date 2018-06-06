@@ -4,6 +4,7 @@ matrix:
   include:
     - php: 7.1
       env: deps=low
+      env: coveralls=true
     - php: 7.1
     - php: 7.2
     - php: nightly
@@ -13,6 +14,7 @@ sudo: false
 env:
   global:
     - deps=standard
+    - coveralls=standard
 
 install:
   - composer self-update -q
@@ -24,4 +26,4 @@ script:
   - make all
 
 after_script:
-  - vendor/bin/coveralls
+  - if [ "$coveralls" = "true" ]; then vendor/bin/coveralls; fi;
