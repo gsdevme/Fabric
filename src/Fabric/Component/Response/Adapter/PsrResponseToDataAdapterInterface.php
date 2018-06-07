@@ -10,7 +10,7 @@ interface PsrResponseToDataAdapterInterface
     /**
      * @param ResponseInterface $response
      *
-     * @return string|array|null
+     * @return null|object
      */
     public function adapt(ResponseInterface $response);
 }

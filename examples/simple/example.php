@@ -25,11 +25,11 @@ class PublicIpAddressResponse implements ResponseInterface, ResponseResourceInte
 
     public static function createFromResponseData($data): ?ResponseInterface
     {
-        if (!isset($data['ip'])) {
-            return null;
+        if (!isset($data->ip)) {
+            throw new \InvalidArgumentException();
         }
 
-        return new self($data['ip']);
+        return new self($data->ip);
     }
 
 }

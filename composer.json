@@ -11,15 +11,16 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Gsdev\\Fabric\\Test\\": [
-        "tests/"
+      "Gsdev\\Fabric\\": [
+        "tests/Fabric"
       ]
     }
   },
   "require": {
     "php": ">=7.1",
     "psr/http-message": "^1.0",
-    "psr/log": "^1.0"
+    "psr/log": "^1.0",
+    "webmozart/json": "^1.2"
   },
   "suggest": {
     "guzzlehttp/guzzle": "If you want to use the Guzzle client"

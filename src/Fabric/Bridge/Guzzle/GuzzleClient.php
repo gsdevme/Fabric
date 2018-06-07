@@ -41,6 +41,7 @@ class GuzzleClient implements ClientInterface
      * @var GuzzleClientInterface
      */
     private $guzzle;
+
     /**
      * @var LoggerInterface
      */
@@ -102,6 +103,11 @@ class GuzzleClient implements ClientInterface
         }
     }
 
+    /**
+     * @param RequestInterface $request
+     * @param null|object $responseData
+     * @return ResponseInterface|null
+     */
     private function doResponse(RequestInterface $request, $responseData): ?ResponseInterface
     {
         if ($request instanceof RequestResponseInterface) {
