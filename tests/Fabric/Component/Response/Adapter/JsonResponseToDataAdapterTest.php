@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Gsdev\Fabric\Test\Component\Response\Adapter;
+namespace Gsdev\Fabric\Component\Response\Adapter;
 
 use Gsdev\Fabric\Component\Response\Adapter\JsonResponseToDataAdapter;
 use Mockery\Adapter\Phpunit\MockeryTestCase;

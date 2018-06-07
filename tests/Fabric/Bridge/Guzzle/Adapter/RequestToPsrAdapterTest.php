@@ -1,9 +1,7 @@
 <?php declare(strict_types = 1);
 
-namespace Gsdev\Fabric\Test\Bridge\Guzzle\Adapter;
+namespace Gsdev\Fabric\Bridge\Guzzle\Adapter;
 
-use Gsdev\Fabric\Bridge\Guzzle\Adapter\RequestToPsrAdapter;
-use Gsdev\Fabric\Model\Request\BodyRequestInterface;
 use Gsdev\Fabric\Model\Request\HeaderRequestInterface;
 use Gsdev\Fabric\Model\Request\QueryStringRequestInterface;
 use Gsdev\Fabric\Model\Request\RequestInterface;

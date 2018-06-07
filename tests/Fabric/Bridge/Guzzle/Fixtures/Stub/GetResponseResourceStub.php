@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Gsdev\Fabric\Test\Bridge\Guzzle\Fixtures\Stub;
+namespace Gsdev\Fabric\Bridge\Guzzle\Fixtures\Stub;
 
 use Gsdev\Fabric\Model\Response\ResponseInterface;
 use Gsdev\Fabric\Model\Response\ResponseResourceInterface;

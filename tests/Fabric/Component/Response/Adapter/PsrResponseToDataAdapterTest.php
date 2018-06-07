@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Gsdev\Fabric\Test\Component\Response\Adapter;
+namespace Gsdev\Fabric\Component\Response\Adapter;
 
 use Gsdev\Fabric\Component\Response\Adapter\PsrResponseToDataAdapter;
 use Gsdev\Fabric\Model\Exception\MissingContentTypeForResponseDataException;
@@ -41,7 +41,7 @@ class PsrResponseToDataAdapterTest extends MockeryTestCase
 
         $return = $this->adapter->adapt($response);
 
-        $this->assertEquals(['data' => 123], $return);
+        $this->assertEquals(123, (string)$return);
     }
 
     public function testAdaptWithJson()
@@ -54,7 +54,7 @@ class PsrResponseToDataAdapterTest extends MockeryTestCase
 
         $return = $this->adapter->adapt($response);
 
-        $this->assertEquals(['test' => 1337], $return);
+        $this->assertEquals((object)['test' => 1337], $return);
     }
 
     public function testAdaptWithJsonEncoding()
@@ -67,7 +67,7 @@ class PsrResponseToDataAdapterTest extends MockeryTestCase
 
         $return = $this->adapter->adapt($response);
 
-        $this->assertEquals(['test' => 1337], $return);
+        $this->assertEquals((object)['test' => 1337], $return);
     }
 
     public function testAdaptWithUnsupportedType()

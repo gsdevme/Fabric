@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace Gsdev\Fabric\Test\Exception;
+namespace Gsdev\Fabric\Model\Exception;
 
-use Gsdev\Fabric\Model\Exception\InvalidResponseDataException;
 use Gsdev\Fabric\Model\Request\RequestInterface;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Mockery;

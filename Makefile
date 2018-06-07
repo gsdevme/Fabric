@@ -16,7 +16,7 @@ static-analysis:
 	vendor/bin/phpstan.phar analyse -l 7 src
 	vendor/bin/phpstan.phar analyse -l 4 tests
 
-tests:
+unit:
 	vendor/bin/phpunit
 
 code-coverage:
@@ -25,4 +25,4 @@ code-coverage:
 mess:
 	vendor/bin/phpmd src/ text phpmd.xml
 
-all: standards static-analysis mess tests
+all: standards static-analysis mess unit

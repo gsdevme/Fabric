@@ -23,7 +23,7 @@ install:
   - composer require --dev --ignore-platform-reqs satooshi/php-coveralls
 
 script:
-  - make all
+  - make
 
 after_script:
   - if [ "$coveralls" = "true" ]; then vendor/bin/coveralls; fi;

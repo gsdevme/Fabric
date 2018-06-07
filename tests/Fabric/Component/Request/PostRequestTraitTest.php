@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Gsdev\Fabric\Test\Component\Request;
+namespace Gsdev\Fabric\Component\Request;
 
 use Gsdev\Fabric\Component\Request\PostRequestTrait;
 use PHPUnit\Framework\TestCase;

@@ -1,14 +1,13 @@
 <?php declare(strict_types = 1);
 
-namespace Gsdev\Fabric\Test\Bridge\Guzzle;
+namespace Gsdev\Fabric\Bridge\Guzzle;
 
-use Gsdev\Fabric\Bridge\Guzzle\GuzzleClient;
 use Gsdev\Fabric\Model\Request\RequestInterface;
 use Gsdev\Fabric\Model\Request\RequestOptionsInterface;
 use Gsdev\Fabric\Model\Request\RequestResponseInterface;
 use Gsdev\Fabric\Model\Request\ValidateResponseDataRequestInterface;
 use Gsdev\Fabric\Model\Validator\ValidatorInterface;
-use Gsdev\Fabric\Test\Bridge\Guzzle\Fixtures\Stub\GetResponseResourceStub;
+use Gsdev\Fabric\Bridge\Guzzle\Fixtures\Stub\GetResponseResourceStub;
 use GuzzleHttp\ClientInterface;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
@@ -50,7 +49,7 @@ class GuzzleClientTest extends MockeryTestCase
         /** @var GetResponseResourceStub $response */
         $response = $this->guzzle->send($request);
 
-        $this->assertSame(['id' => 1], $response->getData());
+        $this->assertEquals((object)['id' => 1], $response->getData());
     }
 
     public function testSimpleJsonSendWithOptions()
@@ -76,7 +75,7 @@ class GuzzleClientTest extends MockeryTestCase
         /** @var GetResponseResourceStub $response */
         $response = $this->guzzle->send($request);
 
-        $this->assertSame(['id' => 1], $response->getData());
+        $this->assertEquals((object)['id' => 1], $response->getData());
     }
 
     public function testSimpleJsonSendWithValidator()
@@ -105,7 +104,7 @@ class GuzzleClientTest extends MockeryTestCase
         /** @var GetResponseResourceStub $response */
         $response = $this->guzzle->send($request);
 
-        $this->assertSame(['id' => 1], $response->getData());
+        $this->assertEquals((object)['id' => 1], $response->getData());
     }
 
     public function testSimpleJsonSendWithValidatorWithInvalid()
